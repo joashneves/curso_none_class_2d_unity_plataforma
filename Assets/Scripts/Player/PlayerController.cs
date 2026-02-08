@@ -53,18 +53,28 @@ public class PlayerController : MonoBehaviour
     }
     private void Pulando()
     {
+        meuAnimacao.SetFloat("velV", meuRigibody.linearVelocityY);
         var pulo = Input.GetButtonDown("Jump");
         if (pulo && this.quantidadesDePulos > 0)
         {
             meuRigibody.linearVelocity = new Vector2(meuRigibody.linearVelocityX, velocidadePulo);
             this.quantidadesDePulos--;
+            meuAnimacao.SetBool("Nochao", false);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Chao"))
+        if (other.gameObject.CompareTag("Chao"))
         {
             quantidadesDePulos = totalDePulos;
+            meuAnimacao.SetBool("Nochao", true);
+        }
+    }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Chao"))
+        {
+            meuAnimacao.SetBool("NoChao", false);
         }
     }
 }
