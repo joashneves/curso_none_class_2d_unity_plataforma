@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 199015327024439917}
   - component: {fileID: 273263768191860194}
   - component: {fileID: 1409063435185668780}
+  - component: {fileID: 2203820271827708598}
   - component: {fileID: 4988807596323986235}
   - component: {fileID: 5450783108297492257}
-  - component: {fileID: 2203820271827708598}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -117,6 +117,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2203820271827708598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060974707002779913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c40acf14dcd0804b83dbb362b46e5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  vida: 10
+  velocidade: 2
+  velocidadePulo: 7
+  totalDePulos: 1
+  leyerLevel:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &4988807596323986235
 Rigidbody2D:
   serializedVersion: 5
@@ -190,21 +209,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8312421, y: 0.8125}
   m_EdgeRadius: 0
---- !u!114 &2203820271827708598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6060974707002779913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c40acf14dcd0804b83dbb362b46e5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  velocidade: 2
-  velocidadePulo: 7
-  totalDePulos: 1
-  leyerLevel:
-    serializedVersion: 2
-    m_Bits: 256

@@ -7,6 +7,7 @@ TagManager:
   - Chao
   - Inimigo
   - ColisaoDeInimigo
+  - Porta
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Level
   - Background
   - ColisaoDeInimigo
-  - 
+  - Porta
   - 
   - 
   - 
@@ -47,14 +48,17 @@ TagManager:
   - name: Background
     uniqueID: 688888653
     locked: 0
-  - name: Player
-    uniqueID: 3521182987
-    locked: 0
   - name: Inimigos
     uniqueID: 994224835
     locked: 0
   - name: Decoracao
     uniqueID: 1734908029
+    locked: 0
+  - name: Porta
+    uniqueID: 3171117425
+    locked: 0
+  - name: Player
+    uniqueID: 3521182987
     locked: 0
   - name: Level
     uniqueID: 778670099

@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Transform meuSprite;
     private Animator meuAnimacao;
     private BoxCollider2D meuBoxCollider;
+     [Header("Informações do Cenario")]
+     [SerializeField] private PortaController portaAtual;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,7 +40,8 @@ public class PlayerController : MonoBehaviour
             Pulando();
             AlterandoSprites();
             Invencibilidade();
-        }
+            AbrindoPorta();
+            }
     }
     void FixedUpdate()
     {
@@ -91,7 +94,11 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("ColisaoDeInimigo")) ;
+        if (other.gameObject.CompareTag("Porta"))
+        {
+            portaAtual = other.GetComponent<PortaController>();
+        }
+        if (other.gameObject.CompareTag("ColisaoDeInimigo"))
         {
             if (transform.position.y >= other.transform.position.y)
             {
@@ -111,6 +118,31 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Porta"))
+        {
+            portaAtual = null;
+        }
+    }
+    private void AbrindoPorta()
+    {
+        if(portaAtual != null)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                portaAtual.AbrindoPorta();
+                 morto = true;
+                 meuRigibody.linearVelocity = Vector2.zero;
+                Invoke("Entrando", 1f);
+            }
+        }
+    }
+    private void Entrando()
+    {
+        meuAnimacao.SetTrigger("Entrando");
+       
     }
     public void Morrendo()
     {
