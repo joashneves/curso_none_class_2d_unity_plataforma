@@ -1,11 +1,15 @@
+using System.Threading;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Informações basicas")]
+    [SerializeField] private int vida = 10;
     [SerializeField] private float velocidade = 2f;
     [SerializeField] private float velocidadePulo = 7f;
     [SerializeField] private int totalDePulos = 1;
+    private bool morto = false;
+    private float delayDano = 0f;
     [Header("Informações do raycast")]
     [SerializeField] private LayerMask leyerLevel;
     private int quantidadesDePulos = 1;
@@ -28,16 +32,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movendo();
-        Pulando();
-        AlterandoSprites();
+        if (!morto)
+        {
+            Movendo();
+            Pulando();
+            AlterandoSprites();
+            Invencibilidade();
+        }
     }
     void FixedUpdate()
     {
         meuAnimacao.SetBool("Nochao", IsGrounded());
         if (IsGrounded())
         {
-            quantidadesDePulos = totalDePulos;    
+            quantidadesDePulos = totalDePulos;
+        }
+    }
+    private void Invencibilidade()
+    {
+        if (delayDano > 0f)
+        {
+            delayDano -= Time.deltaTime;
         }
     }
     private void Movendo()
@@ -46,7 +61,7 @@ public class PlayerController : MonoBehaviour
         float minhaVelocidadex = horizontalVelocidade * velocidade;
         meuRigibody.linearVelocity = new Vector2(minhaVelocidadex, meuRigibody.linearVelocityY);
         //Debug.Log($"DEBUG : Velocidade esta {minhaVelocidadex}");
-        if(minhaVelocidadex != 0)
+        if (minhaVelocidadex != 0)
         {
             meuAnimacao.SetBool("Movendo", true);
             //Debug.Log($"Animação andando {minhaVelocidadex}");
@@ -61,7 +76,7 @@ public class PlayerController : MonoBehaviour
         float horizontalVelocidade = Input.GetAxis("Horizontal");
         float minhaVelocidadex = horizontalVelocidade * velocidade;
         meuSprite.localScale = new Vector3(Mathf.Sign(minhaVelocidadex), 1f, 1f);
-        
+
     }
     private void Pulando()
     {
@@ -74,17 +89,33 @@ public class PlayerController : MonoBehaviour
             //meuAnimacao.SetBool("Nochao", false);
         }
     }
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Chao"))
+        if (other.gameObject.CompareTag("ColisaoDeInimigo")) ;
         {
-           // quantidadesDePulos = totalDePulos;
-            //meuAnimacao.SetBool("Nochao", true);
+            if (transform.position.y >= other.transform.position.y)
+            {
+                Debug.Log("POr cima");
+                meuRigibody.linearVelocity = new Vector2(meuRigibody.linearVelocityX, velocidadePulo);
+                other.GetComponentInParent<Animator>().SetTrigger("Dano");
+            }
+            else
+            {
+                Debug.Log("Por baixo");
+                if (delayDano <= 0f)
+                {
+                    vida--;
+                    delayDano = 2f;
+                    meuAnimacao.SetTrigger("Dano");
+                    meuAnimacao.SetInteger("Vida", vida);
+                }
+            }
         }
     }
-    void OnCollisionExit2D(Collision2D other)
+    public void Morrendo()
     {
-        
+        morto = true;
+        meuRigibody.linearVelocity = Vector2.zero;
     }
     private bool IsGrounded()
     {
