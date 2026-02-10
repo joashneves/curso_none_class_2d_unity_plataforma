@@ -6,10 +6,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float velocidade = 2f;
     [SerializeField] private float velocidadePulo = 7f;
     [SerializeField] private int totalDePulos = 1;
+    [Header("Informações do raycast")]
+    [SerializeField] private LayerMask leyerLevel;
     private int quantidadesDePulos = 1;
     private Rigidbody2D meuRigibody;
     private Transform meuSprite;
     private Animator meuAnimacao;
+    private BoxCollider2D meuBoxCollider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour
         meuRigibody = GetComponent<Rigidbody2D>();
         meuSprite = GetComponent<Transform>();
         meuAnimacao = GetComponent<Animator>();
+        meuBoxCollider = GetComponent<BoxCollider2D>();
         // variaveis do player
         this.quantidadesDePulos = totalDePulos;
     }
@@ -27,6 +31,14 @@ public class PlayerController : MonoBehaviour
         Movendo();
         Pulando();
         AlterandoSprites();
+    }
+    void FixedUpdate()
+    {
+        meuAnimacao.SetBool("Nochao", IsGrounded());
+        if (IsGrounded())
+        {
+            quantidadesDePulos = totalDePulos;    
+        }
     }
     private void Movendo()
     {
@@ -59,22 +71,34 @@ public class PlayerController : MonoBehaviour
         {
             meuRigibody.linearVelocity = new Vector2(meuRigibody.linearVelocityX, velocidadePulo);
             this.quantidadesDePulos--;
-            meuAnimacao.SetBool("Nochao", false);
+            //meuAnimacao.SetBool("Nochao", false);
         }
     }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Chao"))
         {
-            quantidadesDePulos = totalDePulos;
-            meuAnimacao.SetBool("Nochao", true);
+           // quantidadesDePulos = totalDePulos;
+            //meuAnimacao.SetBool("Nochao", true);
         }
     }
     void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Chao"))
+        
+    }
+    private bool IsGrounded()
+    {
+        bool chao = Physics2D.Raycast(meuBoxCollider.bounds.center, Vector2.down, .6f, leyerLevel);
+        Color cor;
+        if (chao)
         {
-            meuAnimacao.SetBool("NoChao", false);
+            cor = Color.red;
         }
+        else
+        {
+            cor = Color.green;
+        }
+        Debug.DrawRay(meuBoxCollider.bounds.center, Vector2.down * 0.6f, cor);
+        return chao;
     }
 }

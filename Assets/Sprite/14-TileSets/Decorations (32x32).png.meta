@@ -142,7 +142,7 @@ TextureImporter:
         serializedVersion: 2
         x: 63
         y: 152
-        width: 130
+        width: 97
         height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -162,9 +162,9 @@ TextureImporter:
       name: Decorations (32x32)_2
       rect:
         serializedVersion: 2
-        x: 63
+        x: 64
         y: 112
-        width: 130
+        width: 42
         height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -246,6 +246,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Decorations (32x32)_6
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 112
+        width: 54
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1420086553fb94699ef8b61b6f3507
+      internalID: 991058106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decorations (32x32)_7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 152
+        width: 32
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40bf4cbf79b44f544a77e4db12ac059e
+      internalID: 1572851878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Decorations (32x32)_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 112
+        width: 33
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 956aefbc32c65d44086d488702a1f421
+      internalID: 845146294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -266,6 +332,9 @@ TextureImporter:
       Decorations (32x32)_3: 3406356269320503256
       Decorations (32x32)_4: -1075017349056126811
       Decorations (32x32)_5: -8255700023269317997
+      Decorations (32x32)_6: 991058106
+      Decorations (32x32)_7: 1572851878
+      Decorations (32x32)_8: 845146294
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -12,10 +12,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Entidades
+  - Decoracao
+  - Level
+  - Background
   - 
   - 
   - 
@@ -41,6 +41,21 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 688888653
+    locked: 0
+  - name: Player
+    uniqueID: 3521182987
+    locked: 0
+  - name: Inimigos
+    uniqueID: 994224835
+    locked: 0
+  - name: Decoracao
+    uniqueID: 1734908029
+    locked: 0
+  - name: Level
+    uniqueID: 778670099
     locked: 0
   m_RenderingLayers:
   - Default
