@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5275298562132717715}
   m_Layer: 10
   m_Name: Colisao
-  m_TagString: Untagged
+  m_TagString: ColisaoDeInimigo
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 994224835
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4571226829092849726, guid: 03e62e2ce4f415549bad1f9627505ddd, type: 3}

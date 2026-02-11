@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D meuBoxCollider;
      [Header("Informações do Cenario")]
      [SerializeField] private PortaController portaAtual;
+     private GameManager meuGameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,8 +27,10 @@ public class PlayerController : MonoBehaviour
         meuRigibody = GetComponent<Rigidbody2D>();
         meuSprite = GetComponent<Transform>();
         meuAnimacao = GetComponent<Animator>();
+        meuGameManager = FindAnyObjectByType<GameManager>();
         meuBoxCollider = GetComponent<BoxCollider2D>();
         // variaveis do player
+        vida = meuGameManager.GetVida();
         this.quantidadesDePulos = totalDePulos;
     }
 
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         meuAnimacao.SetBool("Nochao", IsGrounded());
-        if (IsGrounded())
+        if (IsGrounded() && meuRigibody.linearVelocityY < 0.1f)
         {
             quantidadesDePulos = totalDePulos;
         }
@@ -115,6 +118,8 @@ public class PlayerController : MonoBehaviour
                     delayDano = 2f;
                     meuAnimacao.SetTrigger("Dano");
                     meuAnimacao.SetInteger("Vida", vida);
+                    meuGameManager.SetVida(vida);
+                    meuGameManager.AjustaVida();
                 }
             }
         }
@@ -130,12 +135,15 @@ public class PlayerController : MonoBehaviour
     {
         if(portaAtual != null)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (portaAtual.TenhoDestino())
             {
-                portaAtual.AbrindoPorta();
-                 morto = true;
-                 meuRigibody.linearVelocity = Vector2.zero;
-                Invoke("Entrando", 1f);
+                if (Input.GetKey(KeyCode.W))
+                {
+                    portaAtual.AbrindoPorta();
+                    morto = true;
+                    meuRigibody.linearVelocity = Vector2.zero;
+                    Invoke("Entrando", 1f);
+                }
             }
         }
     }
@@ -148,6 +156,10 @@ public class PlayerController : MonoBehaviour
     {
         morto = true;
         meuRigibody.linearVelocity = Vector2.zero;
+    }
+    public void Reiniciando()
+    {
+        meuGameManager.GameOver();
     }
     private bool IsGrounded()
     {
